@@ -1,7 +1,9 @@
+
 'use strict';
 
 const path = require('path');
 const fs = require('fs');
+const globby = require('globby');
 const getPublicUrlOrPath = require('react-dev-utils/getPublicUrlOrPath');
 
 // Make sure any symlinks in the project folder are resolved:
@@ -20,6 +22,13 @@ const publicUrlOrPath = getPublicUrlOrPath(
   require(resolveApp('package.json')).homepage,
   process.env.PUBLIC_URL
 );
+
+// 打包的入口路径
+const entriesPath = globby.sync([resolveApp('src') + '/*/index.js']).map(filePath => {
+  let tmp = filePath.split('/');
+  let name = tmp[tmp.length - 2];
+  return {path: filePath, name}
+});
 
 const moduleFileExtensions = [
   'web.mjs',
@@ -48,14 +57,17 @@ const resolveModule = (resolveFn, filePath) => {
   return resolveFn(`${filePath}.js`);
 };
 
+
 // config after eject: we're in ./config/
+var projectname = process.argv[process.argv.length-1];
 module.exports = {
   dotenv: resolveApp('.env'),
   appPath: resolveApp('.'),
-  appBuild: resolveApp('build'),
+  appBuild: resolveApp('dist'),
   appPublic: resolveApp('public'),
   appHtml: resolveApp('public/index.html'),
   appIndexJs: resolveModule(resolveApp, 'src/index'),
+  buildPath:resolveModule(resolveApp, `src/${projectname}/index`),
   appPackageJson: resolveApp('package.json'),
   appSrc: resolveApp('src'),
   appTsConfig: resolveApp('tsconfig.json'),
@@ -65,6 +77,7 @@ module.exports = {
   proxySetup: resolveApp('src/setupProxy.js'),
   appNodeModules: resolveApp('node_modules'),
   publicUrlOrPath,
+  entriesPath
 };
 
 
