@@ -3,25 +3,26 @@
  * @Author: qingyang
  * @Date: 2020-09-10 13:36:58
  * @LastEditors: qingyang
- * @LastEditTime: 2020-09-11 13:58:05
+ * @LastEditTime: 2020-09-11 18:04:49
  */
 import React, { Component } from "react";
 import ReactDOM from 'react-dom';
 import { Provider } from "react-redux";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 import * as serviceWorker from '@/serviceWorker';
 import configureStore from "./store";
 import Home from  './pages/Home/index';
+import Order from  './pages/Order/index';
 const store = configureStore();
-
 class Admin extends Component {
   render() {
       return (
           <Provider store={store}>
               <Router>
-                  <Switch>
-                      <Route path="/admin/" component={Home} />
-                  </Switch>
+                     {/* <Redirect to={"/admin"} /> */}
+                    <Route exact path='/admin' component={Home}/>
+					{/* <Route exact path='/'  component={Home}/> */}
+					<Route  path='/admin/order' component={Order}/>
               </Router>
           </Provider>
       );
