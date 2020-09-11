@@ -3,10 +3,10 @@
  * @Author: qingyang
  * @Date: 2020-09-10 14:43:34
  * @LastEditors: qingyang
- * @LastEditTime: 2020-09-10 16:22:18
+ * @LastEditTime: 2020-09-11 11:08:51
  */
 import React, { Component } from "react";
-import logo from "../../../static/images/logo.svg";
+import logo from "@/assets/images/logo.svg";
 import "./index.less";
 
 class App extends Component {

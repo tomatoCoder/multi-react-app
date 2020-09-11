@@ -24,7 +24,7 @@ const publicUrlOrPath = getPublicUrlOrPath(
 );
 
 // 打包的入口路径
-const entriesPath = globby.sync([resolveApp('src') + '/*/index.js']).map(filePath => {
+const entriesPath = globby.sync([resolveApp('src/projects') + '/*/index.js']).map(filePath => {
   let tmp = filePath.split('/');
   let name = tmp[tmp.length - 2];
   return {path: filePath, name}
@@ -67,7 +67,7 @@ module.exports = {
   appPublic: resolveApp('public'),
   appHtml: resolveApp('public/index.html'),
   appIndexJs: resolveModule(resolveApp, 'src/index'),
-  buildPath:resolveModule(resolveApp, `src/${projectname}/index`),
+  buildPath:resolveModule(resolveApp, `src/projects/${projectname}/index`),
   appPackageJson: resolveApp('package.json'),
   appSrc: resolveApp('src'),
   appTsConfig: resolveApp('tsconfig.json'),

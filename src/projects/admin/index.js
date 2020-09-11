@@ -3,15 +3,15 @@
  * @Author: qingyang
  * @Date: 2020-09-10 13:36:58
  * @LastEditors: qingyang
- * @LastEditTime: 2020-09-10 15:49:54
+ * @LastEditTime: 2020-09-11 13:58:05
  */
 import React, { Component } from "react";
 import ReactDOM from 'react-dom';
 import { Provider } from "react-redux";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import * as serviceWorker from '../serviceWorker';
+import * as serviceWorker from '@/serviceWorker';
 import configureStore from "./store";
-import Home from  './pages/Home';
+import Home from  './pages/Home/index';
 const store = configureStore();
 
 class Admin extends Component {
@@ -20,7 +20,7 @@ class Admin extends Component {
           <Provider store={store}>
               <Router>
                   <Switch>
-                      <Route path="/client/" component={Home} />
+                      <Route path="/admin/" component={Home} />
                   </Switch>
               </Router>
           </Provider>
