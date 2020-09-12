@@ -13,6 +13,8 @@ import * as serviceWorker from '@/serviceWorker';
 import configureStore from "./store";
 import Home from  './pages/Home/index';
 import Order from  './pages/Order/index';
+import OrderDetail from  './pages/OrderDetail/index';
+
 const store = configureStore();
 class Admin extends Component {
   render() {
@@ -20,9 +22,11 @@ class Admin extends Component {
           <Provider store={store}>
               <Router>
                      {/* <Redirect to={"/admin"} /> */}
+                     <Redirect path="/" to="/admin" exact />
                     <Route exact path='/admin' component={Home}/>
 					{/* <Route exact path='/'  component={Home}/> */}
-					<Route  path='/admin/order' component={Order}/>
+					<Route exact path='/admin/order' component={Order}/>
+                    <Route path='/admin/order/order-detail' component={OrderDetail}/>
               </Router>
           </Provider>
       );
