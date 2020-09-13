@@ -17,9 +17,10 @@ const store = configureStore();
 class Admin extends Component {
   render() {
       return (
-          <Provider>
-              <Router>
+            <Provider store={store}>
+            <Router>
                   <Switch>
+                     <Route exact path="/" component={Home} />
                       <Route path="/client/" component={Home} />
                   </Switch>
               </Router>

@@ -15,16 +15,22 @@ import Home from  './pages/Home/index';
 import Order from  './pages/Order/index';
 import OrderDetail from  './pages/OrderDetail/index';
 
+import {addUser} from './store/action'
 const store = configureStore();
+// store.subscribe(() => {
+//     console.log(store.getState())   
+
+// });
+// store.dispatch(addUser({id: 1, name: '派大星1'}));
+
 class Admin extends Component {
   render() {
       return (
           <Provider store={store}>
               <Router>
-                     {/* <Redirect to={"/admin"} /> */}
-                     <Redirect path="/" to="/admin" exact />
+                    <Route exact path="/" component={Home} />
+                     {/* <Redirect path="/" to="/admin" exact /> */}
                     <Route exact path='/admin' component={Home}/>
-					{/* <Route exact path='/'  component={Home}/> */}
 					<Route exact path='/admin/order' component={Order}/>
                     <Route path='/admin/order/order-detail' component={OrderDetail}/>
               </Router>

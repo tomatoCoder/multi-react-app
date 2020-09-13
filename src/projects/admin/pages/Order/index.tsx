@@ -18,6 +18,9 @@ export default class Order extends Component {
                 <Link to="/admin/order/order-detail" style={{color:'black'}}>
                     <div>点击跳转到orderDetail</div>
                 </Link>
+                <Link to="/admin" style={{color:'black'}}>
+                    <div>回到首页</div>
+                </Link>
             </div>
         );
     }

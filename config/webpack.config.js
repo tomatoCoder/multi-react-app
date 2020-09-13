@@ -132,18 +132,29 @@ module.exports = function(webpackEnv) {
   function getEntries(){
     const entries = {};
     var projectname = process.argv[process.argv.length-1];
-    // 生产环境支持单个打包
-    if(isEnvProduction && process.argv.length === 3) {
-      entries[projectname] = [paths.buildPath]
-    }else {
-      const files = paths.entriesPath;
-      files.forEach(({name, path}) => {
-        entries[name] = [
-          isEnvDevelopment && require.resolve('react-dev-utils/webpackHotDevClient'),
-          path,
-        ].filter(Boolean);
-      });
+    if (process.argv.length !== 3) {
+      throw new Error(
+        'please add project name  after npm run build or npm run dev !!!'
+      );
+    } else {
+      entries['index'] = [
+        isEnvDevelopment && require.resolve('react-dev-utils/webpackHotDevClient'),
+        paths.buildPath,
+      ].filter(Boolean);
     }
+    
+    // 生产环境支持单个打包
+    // if(isEnvProduction && process.argv.length === 3) {
+    //   entries['index'] = [paths.buildPath]
+    // }else {
+    //   const files = paths.entriesPath;
+    //   files.forEach(({name, path}) => {
+    //     entries[name] = [
+    //       isEnvDevelopment && require.resolve('react-dev-utils/webpackHotDevClient'),
+    //       path,
+    //     ].filter(Boolean);
+    //   });
+    // }
     return entries;
   }
 
@@ -154,7 +165,7 @@ module.exports = function(webpackEnv) {
         inject: true,
         template: paths.appHtml,
         chunks: [name, 0], // 只会插入名字中带 "0" 或者 带 name 的js 问题
-        filename: `${name}.html`,
+        filename: `index.html`,
         title: `${name}`,
 
       }, isEnvProduction
