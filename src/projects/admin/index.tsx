@@ -3,7 +3,7 @@
  * @Author: qingyang
  * @Date: 2020-09-10 13:36:58
  * @LastEditors: qingyang
- * @LastEditTime: 2020-09-11 18:04:49
+ * @LastEditTime: 2020-09-14 15:38:35
  */
 import React, { Component } from "react";
 import ReactDOM from 'react-dom';
@@ -14,8 +14,8 @@ import configureStore from "./store";
 import Home from  './pages/Home/index';
 import Order from  './pages/Order/index';
 import OrderDetail from  './pages/OrderDetail/index';
+import  '@/config/ui.cofig'
 
-import {addUser} from './store/action'
 const store = configureStore();
 // store.subscribe(() => {
 //     console.log(store.getState())   

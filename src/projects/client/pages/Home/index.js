@@ -3,13 +3,19 @@
  * @Author: qingyang
  * @Date: 2020-09-10 14:43:34
  * @LastEditors: qingyang
- * @LastEditTime: 2020-09-11 11:08:51
+ * @LastEditTime: 2020-09-14 13:30:32
  */
 import React, { Component } from "react";
 import logo from "@/assets/images/logo.svg";
 import "./index.less";
 
 class App extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            name: '123'   
+        }
+    }
     render() {
         return (
             <div className="App-pc">
