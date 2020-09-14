@@ -3,7 +3,7 @@
  * @Author: qingyang
  * @Date: 2020-09-10 13:36:58
  * @LastEditors: qingyang
- * @LastEditTime: 2020-09-14 15:38:35
+ * @LastEditTime: 2020-09-14 17:44:08
  */
 import React, { Component } from "react";
 import ReactDOM from 'react-dom';
@@ -14,26 +14,28 @@ import configureStore from "./store";
 import Home from  './pages/Home/index';
 import Order from  './pages/Order/index';
 import OrderDetail from  './pages/OrderDetail/index';
+import Login from  './pages/Login/index';
 import  '@/config/ui.cofig'
+import { Layout } from 'antd';
+
+const { Header, Footer, Sider, Content } = Layout;
 
 const store = configureStore();
-// store.subscribe(() => {
-//     console.log(store.getState())   
-
-// });
-// store.dispatch(addUser({id: 1, name: '派大星1'}));
 
 class Admin extends Component {
   render() {
       return (
           <Provider store={store}>
-              <Router>
-                    <Route exact path="/" component={Home} />
-                     {/* <Redirect path="/" to="/admin" exact /> */}
-                    <Route exact path='/admin' component={Home}/>
-					<Route exact path='/admin/order' component={Order}/>
-                    <Route path='/admin/order/order-detail' component={OrderDetail}/>
-              </Router>
+            <Router>
+            <Switch>
+                <Route exact path="/" component={Home} />
+                {/* <Redirect path="/" to="/admin" exact /> */}
+                <Route exact path='/admin' component={Home}/>
+                <Route exact path='/admin/order' component={Order}/>
+                <Route path='/admin/order/order-detail' component={OrderDetail}/>
+                <Route exact path='/login' component={Login}/>
+            </Switch>
+            </Router>
           </Provider>
       );
   }
