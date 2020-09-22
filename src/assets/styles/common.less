@@ -1,4 +1,21 @@
 
+.wh(@w,@h:@w){
+    width:@w;
+    height: @h;
+}
 .test {
-    color: red;
+    color: @primary-color;
+}
+// line
+.line-ellipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.line-ellipsisRows(@val:2){
+    display: -webkit-box; 
+    -webkit-line-clamp: @val;
+    overflow: hidden;
+    /*! autoprefixer: ignore next */
+    -webkit-box-orient: vertical;
 }

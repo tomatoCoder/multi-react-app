@@ -121,6 +121,9 @@ module.exports = function(webpackEnv) {
         {
           loader: require.resolve(preProcessor),
           options: {
+            lessOptions: { // 如果使用less-loader@5，请移除 lessOptions 这一级直接配置选项。
+              javascriptEnabled: true,
+            },
             sourceMap: true,
           },
         }
@@ -527,39 +530,39 @@ module.exports = function(webpackEnv) {
             },
             // less loader
             {
-              test: /\.less$/,
-              use: [{
-                loader: 'style-loader',
-              }, {
-                loader: 'css-loader', // translates CSS into CommonJS
-              }, {
-                loader: 'less-loader', // compiles Less to CSS
-               options: {
-                 lessOptions: { // 如果使用less-loader@5，请移除 lessOptions 这一级直接配置选项。
-                  javascriptEnabled: true,
-                 },
-               },
-              }],
+              test: lessRegex,
+              exclude: lessModuleRegex,
+              use: getStyleLoaders({
+                importLoaders: 2,
+                sourceMap: isEnvProduction && shouldUseSourceMap
+              }, 'less-loader').concat([
+                {
+                    loader: "style-resources-loader",
+                    options: {
+                      patterns: path.join(__dirname, "../src/assets/styles/index.less"),
+                      injector: 'append'
+                    }
+                }
+              ]),
+              sideEffects: true
             },
-            // {
-            //   test: lessRegex,
-            //   exclude: lessModuleRegex,
-            //   use: getStyleLoaders({
-            //     importLoaders: 2,
-            //     sourceMap: isEnvProduction && shouldUseSourceMap
-            //   }, 'less-loader'),
-            //   sideEffects: true
-            // },
-            // {
-            //   test: lessModuleRegex,
-            //   use: getStyleLoaders({
-            //     javascriptEnabled: true,
-            //     importLoaders: 2,
-            //     sourceMap: isEnvProduction && shouldUseSourceMap,
-            //     modules: true,
-            //     getLocalIdent: getCSSModuleLocalIdent
-            //   }, 'less-loader')
-            // },
+            {
+              test: lessModuleRegex,
+              use: getStyleLoaders({
+                importLoaders: 2,
+                sourceMap: isEnvProduction && shouldUseSourceMap,
+                modules: true,
+                getLocalIdent: getCSSModuleLocalIdent
+              }, 'less-loader').concat([
+                {
+                    loader: "style-resources-loader",
+                    options: {
+                      patterns: path.join(__dirname, "../src/assets/styles/index.less"),
+                      injector: 'append'
+                    }
+                }
+              ])
+            },
             
             // "file" loader makes sure those assets get served by WebpackDevServer.
             // When you `import` an asset, you get its (virtual) filename.

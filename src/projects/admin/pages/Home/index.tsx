@@ -3,11 +3,10 @@
  * @Author: qingyang
  * @Date: 2020-09-10 14:43:34
  * @LastEditors: qingyang
- * @LastEditTime: 2020-09-14 16:22:11
+ * @LastEditTime: 2020-09-22 11:12:06
  */
 import React, { Component } from "react";
 import logo from "@/assets/images/logo.svg";
-import "@/assets/styles/index.less";
 import "./index.less";
 import { isDef } from "@/utils/base";
 import { Link } from 'react-router-dom';
@@ -44,13 +43,11 @@ class App extends Component<comProps, comState> {
     }
     componentDidMount() {
         console.log(this.props);
-        debugger
         let u = 1;
         console.log(isDef(u))
         
     }
-    handleClick() {
-       
+    handleClick = (test: string) => {
        this.setState({
            name: 'paidaxing',
            
@@ -61,12 +58,13 @@ class App extends Component<comProps, comState> {
         return (
             <div className="App-pc">
                 <header className="App-header">
+                    <div className="wrap"></div>
                     <p  className="test">{this.props.userInfo.name? this.props.userInfo.name : '未登录'}</p>
                     <img src={logo} className="App-logo" alt="logo" />
                     <Link to="/admin/order" style={{color:'black'}}>
                     <div>点击跳转到order</div>
                     </Link>
-                    <Button type="primary" onClick={() => this.handleClick()}>登录</Button>
+                    <Button type="primary" onClick={this.handleClick.bind(this, '123')}>登录</Button>
                     <p>版本号{VERSION}</p>
                 </header>
                 <p></p>

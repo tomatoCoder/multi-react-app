@@ -3,12 +3,12 @@
  * @Author: qingyang
  * @Date: 2020-09-10 14:43:34
  * @LastEditors: qingyang
- * @LastEditTime: 2020-09-14 16:21:44
+ * @LastEditTime: 2020-09-22 14:17:04
  */
 import React, { Component } from "react";
 import { Link } from 'react-router-dom';
-import { connect } from "react-redux";
 import { Button } from 'antd';
+import { connect } from "react-redux";
 
 const mapStateToProps = (state: any) => {
     return {
@@ -17,6 +17,7 @@ const mapStateToProps = (state: any) => {
   };
 const mapDispatchToProps = (dispatch: any) => ({
 });
+
  class Order extends Component<any,any> {
     componentDidMount() {
         

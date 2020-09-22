@@ -3,7 +3,7 @@
  * @Author: qingyang
  * @Date: 2020-09-11 10:43:00
  * @LastEditors: qingyang
- * @LastEditTime: 2020-09-11 13:29:41
+ * @LastEditTime: 2020-09-22 10:39:28
  */
 
 export const isDef =  (v: any) : Boolean => {
@@ -25,4 +25,12 @@ export const remove = (arr: Array<any>, item: any)  : Array<any> | void  =>{
       return arr.splice(index, 1)
     }
   }
+}
+//价格整数取整，有小数点取2位
+export const toDecimal = (number:any) =>{
+  let num = Number(number);
+  if(isNaN(num)){
+    return number
+  }
+  return num.toString().indexOf(".") !== -1?num.toFixed(2) :  num;
 }
