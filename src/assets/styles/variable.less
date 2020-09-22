@@ -2,3 +2,18 @@
 @primary-color: #be1480;
 @info-color: @primary-color;
 @success-color: green;
+
+
+
+.wh(@w,@h:@w){
+    width:@w;
+    height: @h;
+}
+// 多行超出文本...
+.line-ellipsisRows(@val:2){
+    display: -webkit-box; 
+    -webkit-line-clamp: @val;
+    overflow: hidden;
+    /*! autoprefixer: ignore next */
+    -webkit-box-orient: vertical;
+}

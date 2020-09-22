@@ -3,17 +3,20 @@
  * @Author: qingyang
  * @Date: 2020-09-10 14:43:34
  * @LastEditors: qingyang
- * @LastEditTime: 2020-09-22 11:12:06
+ * @LastEditTime: 2020-09-22 15:52:39
  */
 import React, { Component } from "react";
 import logo from "@/assets/images/logo.svg";
-import "./index.less";
+// import "./index.module.less";
+
 import { isDef } from "@/utils/base";
 import { Link } from 'react-router-dom';
 import { message, Button } from 'antd';
 import { VERSION } from "@/config/project.config";
 import { connect } from "react-redux";
 import {addUser} from '@/projects/admin/store/action'
+const styles = require('./index.module.less');
+// import './index.less'
 interface comState {
     name: string
 }
@@ -55,12 +58,14 @@ class App extends Component<comProps, comState> {
        this.props.setUserInfo();
     }
     render() {
+        let test = 'wrap--test'
         return (
-            <div className="App-pc">
+            <div className={styles.app}>
                 <header className="App-header">
-                    <div className="wrap"></div>
+                    <div className={`${styles[test]} ${styles.line2}`}>1231312312321安静的干哈多久啊是都很难哈京东干啥 3123123</div>
+                    <div className="wrap--test"></div>
                     <p  className="test">{this.props.userInfo.name? this.props.userInfo.name : '未登录'}</p>
-                    <img src={logo} className="App-logo" alt="logo" />
+                    <img src={logo} className="app--logo" alt="logo" />
                     <Link to="/admin/order" style={{color:'black'}}>
                     <div>点击跳转到order</div>
                     </Link>

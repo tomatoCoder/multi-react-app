@@ -3,7 +3,7 @@
  * @Author: qingyang
  * @Date: 2020-09-10 14:43:34
  * @LastEditors: qingyang
- * @LastEditTime: 2020-09-14 17:16:27
+ * @LastEditTime: 2020-09-22 14:27:44
  */
 import React, { Component } from "react";
 
@@ -27,7 +27,8 @@ class Login extends Component<any, comState> {
     render() {
         return (
             <div id="login">
-               <p>我是登录页面</p>
+                <div className="wrap"></div>
+               <p style={{color:'red'}}>我是登录页面1</p>
             </div>
         );
     }

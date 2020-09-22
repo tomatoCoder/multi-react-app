@@ -3,13 +3,13 @@
  * @Author: qingyang
  * @Date: 2020-09-10 14:43:34
  * @LastEditors: qingyang
- * @LastEditTime: 2020-09-22 14:17:04
+ * @LastEditTime: 2020-09-22 14:32:40
  */
 import React, { Component } from "react";
 import { Link } from 'react-router-dom';
 import { Button } from 'antd';
 import { connect } from "react-redux";
-
+import './index.less'
 const mapStateToProps = (state: any) => {
     return {
       userInfo: state.userInfo
@@ -25,6 +25,7 @@ const mapDispatchToProps = (dispatch: any) => ({
     render() {
         return (
             <div className="App-pc">
+                <div className="wrap">123</div>
                 <p>name:{this.props.userInfo.name}</p>
                 我是订单页面
                 <Link to="/admin/order/order-detail" style={{color:'black'}}>

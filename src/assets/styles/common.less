@@ -1,21 +1,11 @@
 
-.wh(@w,@h:@w){
-    width:@w;
-    height: @h;
-}
+
 .test {
-    color: @primary-color;
+    color: green;
 }
-// line
+// 单行超出文本...
 .line-ellipsis {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-}
-.line-ellipsisRows(@val:2){
-    display: -webkit-box; 
-    -webkit-line-clamp: @val;
-    overflow: hidden;
-    /*! autoprefixer: ignore next */
-    -webkit-box-orient: vertical;
 }

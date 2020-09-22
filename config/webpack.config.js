@@ -533,7 +533,7 @@ module.exports = function(webpackEnv) {
               test: lessRegex,
               exclude: lessModuleRegex,
               use: getStyleLoaders({
-                importLoaders: 2,
+                importLoaders: 3,
                 sourceMap: isEnvProduction && shouldUseSourceMap
               }, 'less-loader').concat([
                 {
@@ -549,15 +549,16 @@ module.exports = function(webpackEnv) {
             {
               test: lessModuleRegex,
               use: getStyleLoaders({
-                importLoaders: 2,
+                importLoaders: 3,
                 sourceMap: isEnvProduction && shouldUseSourceMap,
-                modules: true,
-                getLocalIdent: getCSSModuleLocalIdent
+                modules: {
+                  getLocalIdent: getCSSModuleLocalIdent
+                }
               }, 'less-loader').concat([
                 {
                     loader: "style-resources-loader",
                     options: {
-                      patterns: path.join(__dirname, "../src/assets/styles/index.less"),
+                      patterns: path.join(__dirname, "../src/assets/styles/variable.less"),
                       injector: 'append'
                     }
                 }
