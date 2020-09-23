@@ -6,12 +6,14 @@
  * @Author: qingyang
  * @Date: 2020-09-10 13:36:58
  * @LastEditors: qingyang
- * @LastEditTime: 2020-09-23 16:50:03
+ * @LastEditTime: 2020-09-23 17:56:19
  */
 import React, { Suspense, lazy }from "react";
 import { Provider } from "react-redux";
 import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 import configureStore from "../store";
+import { renderRoutes } from "react-router-config";
+import routes from './routes'
 const store = configureStore();
 
 const loadRouter = (name: string) => {
@@ -30,22 +32,8 @@ export const RouterView =
   <Suspense fallback={<div>loading...</div>}>
     <Provider store={store}>
         <Router>
-        <Switch>
-            <Route exact path="/"  render={() =>
-                <MainLayout>
-                    {/* <Route  path='/admin' component={Home}/>
-                    <Route  path='/order/:id' component={Order}/>
-                    <Route path='/admin/order/order-detail' component={OrderDetail}/>  */}
-                </MainLayout>
-            }/>
-                {/* <Route  path='/admin' component={Home}/> */}
-                {/* <Route  path='/admin/order/:id' component={Order}/>
-                <Route path='/admin/order/order-detail' component={OrderDetail}/>  */}
-            <Route exact path='/admin' component={MainLayout}/>
-            <Route path='/login' component={Login}/>
-            <Route path="*" component={Notfound} />
-        </Switch>
-        </Router>
+            {renderRoutes(routes)}
+        </Router>   
     </Provider>
   </Suspense>
 
