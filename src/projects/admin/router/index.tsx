@@ -6,7 +6,7 @@
  * @Author: qingyang
  * @Date: 2020-09-10 13:36:58
  * @LastEditors: qingyang
- * @LastEditTime: 2020-09-15 10:31:53
+ * @LastEditTime: 2020-09-23 16:50:03
  */
 import React, { Suspense, lazy }from "react";
 import { Provider } from "react-redux";
@@ -22,20 +22,30 @@ const Login = loadRouter('Login');
 const Home = loadRouter('Home');
 const Order = loadRouter('Order');
 const OrderDetail = loadRouter('OrderDetail');
+const Notfound = loadRouter('Notfound');
+const MainLayout = loadRouter('MainLayout');
+
 
 export const RouterView =
   <Suspense fallback={<div>loading...</div>}>
-      <Provider store={store}>
-      <Router>
-      <Switch>
-          <Route exact path="/" component={Home} />
-          <Route exact path='/admin' component={Home}/>
-          <Route exact path='/admin/order' component={Order}/>
-          <Route path='/admin/order/order-detail' component={OrderDetail}/>
-          <Route exact path='/login' component={Login}/>
-          <Redirect to='/'></Redirect>
-      </Switch>
-      </Router>
-      </Provider>
+    <Provider store={store}>
+        <Router>
+        <Switch>
+            <Route exact path="/"  render={() =>
+                <MainLayout>
+                    {/* <Route  path='/admin' component={Home}/>
+                    <Route  path='/order/:id' component={Order}/>
+                    <Route path='/admin/order/order-detail' component={OrderDetail}/>  */}
+                </MainLayout>
+            }/>
+                {/* <Route  path='/admin' component={Home}/> */}
+                {/* <Route  path='/admin/order/:id' component={Order}/>
+                <Route path='/admin/order/order-detail' component={OrderDetail}/>  */}
+            <Route exact path='/admin' component={MainLayout}/>
+            <Route path='/login' component={Login}/>
+            <Route path="*" component={Notfound} />
+        </Switch>
+        </Router>
+    </Provider>
   </Suspense>
 

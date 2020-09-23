@@ -3,7 +3,7 @@
  * @Author: qingyang
  * @Date: 2020-09-10 14:43:34
  * @LastEditors: qingyang
- * @LastEditTime: 2020-09-22 14:32:40
+ * @LastEditTime: 2020-09-22 16:35:15
  */
 import React, { Component } from "react";
 import { Link } from 'react-router-dom';
@@ -20,7 +20,7 @@ const mapDispatchToProps = (dispatch: any) => ({
 
  class Order extends Component<any,any> {
     componentDidMount() {
-        
+        console.log(this.props.match.params.id);
     }
     render() {
         return (
