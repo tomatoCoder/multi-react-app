@@ -3,11 +3,13 @@
  * @Author: qingyang
  * @Date: 2020-09-10 14:43:34
  * @LastEditors: qingyang
- * @LastEditTime: 2020-09-11 16:04:12
+ * @LastEditTime: 2020-09-24 13:03:50
  */
 import React, { Component } from "react";
-export default class Order extends Component {
+export default class OrderDetail extends Component<any,any> {
     componentDidMount() {
+        debugger
+        console.log(this.props.match.params.id); 
     }
     render() {
         return (

@@ -3,7 +3,7 @@
  * @Author: qingyang
  * @Date: 2020-09-10 14:43:34
  * @LastEditors: qingyang
- * @LastEditTime: 2020-09-24 13:03:21
+ * @LastEditTime: 2020-09-24 11:24:40
  */
 import React, { Component } from "react";
 import { Link } from 'react-router-dom';
@@ -21,20 +21,14 @@ const mapDispatchToProps = (dispatch: any) => ({
 });
 
  class Order extends Component<any,any> {
+    componentDidMount() {
+        console.log(this.props.match.params.id);
+    }
     render() {
         debugger
         return (
             <div className="App-pc">
-                <div className="wrap">123</div>
-                <p>name:{this.props.userInfo.name}</p>
-                我是订单页面
-                <Link to="/admin/order/order-detail/123">
-                    <div>点击跳转到orderDetail</div>
-                </Link>
-                <Link to="/admin" style={{color:'black'}}>
-                    <div>回到首页</div>
-                </Link>
-                <Button onClick={this.props.setUserInfo}>获取用户信息</Button>
+                财务模块
             </div>
         );
     }
