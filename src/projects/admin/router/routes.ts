@@ -3,9 +3,9 @@
  * @Author: qingyang
  * @Date: 2020-09-23 17:35:58
  * @LastEditors: qingyang
- * @LastEditTime: 2020-09-24 13:10:38
+ * @LastEditTime: 2020-09-24 14:07:25
  */
-import React, { Suspense, lazy }from "react";
+import { lazy }from "react";
 const loadRouter = (name: string) => {
     return lazy(() => import(/* webpackChunkName: "admin" */ `../pages/${name}/index`))
 }

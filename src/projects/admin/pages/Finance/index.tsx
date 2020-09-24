@@ -3,14 +3,11 @@
  * @Author: qingyang
  * @Date: 2020-09-10 14:43:34
  * @LastEditors: qingyang
- * @LastEditTime: 2020-09-24 11:24:40
+ * @LastEditTime: 2020-09-24 14:08:31
  */
 import React, { Component } from "react";
-import { Link } from 'react-router-dom';
-import { Button } from 'antd';
 import { connect } from "react-redux";
 import './index.less'
-import { renderRoutes } from 'react-router-config';
 
 const mapStateToProps = (state: any) => {
     return {

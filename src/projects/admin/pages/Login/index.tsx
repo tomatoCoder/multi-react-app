@@ -3,29 +3,16 @@
  * @Author: qingyang
  * @Date: 2020-09-10 14:43:34
  * @LastEditors: qingyang
- * @LastEditTime: 2020-09-23 15:27:03
+ * @LastEditTime: 2020-09-24 15:57:59
  */
 import React, { Component } from "react";
-import { message, Button, Form, Input, Select } from 'antd';
-import { connect } from "react-redux";
-import {addUser} from '@/projects/admin/store/action'
+import {Button, Form, Input } from 'antd';
 
 interface comState {
     name: string,
     psw: string
 }
 
-const mapStateToProps = (state: any) => {
-    return {
-      userInfo: state.userInfo
-    };
-  };
-const mapDispatchToProps = (dispatch: any) => ({
-    setUserInfo: (name: string) => {
-        message.info('登录成功');
-        dispatch(addUser({id: 1, name}));
-    },
-});
 const layout = {
     labelCol: { span: 8 },
     wrapperCol: { span: 8 },
@@ -41,21 +28,13 @@ class Login extends Component<any, comState> {
     componentDidMount() {
         
     }
-    loginClick = (value:String, e:any) => {
-        e.preventDefault();
-        this.props.form.validateFields((errors: any, values: any) => {
-            debugger
-            if (errors) {
-                console.log('Errors in form!!!');
-                return;
-            }
-        });
-        return
-        
-    }
     onFinish = (values: any) => {
-        this.props.history.push('/admin');
-        this.props.setUserInfo(values.username);
+        //TODO 登录接口请求成功之后获取token
+        localStorage.setItem('token', '12313')
+        if(localStorage.getItem('token')){
+            //刷新页面用来重新渲染app节点
+             window.location.reload()
+        }
       };
     
     onFinishFailed = (errorInfo: any) => {
@@ -98,4 +77,4 @@ class Login extends Component<any, comState> {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login)
+export default Login

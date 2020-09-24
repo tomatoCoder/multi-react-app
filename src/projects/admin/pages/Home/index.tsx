@@ -3,7 +3,7 @@
  * @Author: qingyang
  * @Date: 2020-09-10 14:43:34
  * @LastEditors: qingyang
- * @LastEditTime: 2020-09-23 14:45:49
+ * @LastEditTime: 2020-09-24 16:20:20
  */
 import React, { Component } from "react";
 import logo from "@/assets/images/logo.svg";
@@ -11,11 +11,10 @@ import logo from "@/assets/images/logo.svg";
 
 import { isDef } from "@/utils/base";
 import { Link } from 'react-router-dom';
-import { message, Button } from 'antd';
 import { VERSION } from "@/config/project.config";
 import { connect } from "react-redux";
-import {loginOut} from '@/projects/admin/store/action'
 const styles = require('./index.module.less');
+
 interface comState {
     name: string
 }
@@ -31,10 +30,6 @@ const mapStateToProps = (state: any) => {
     };
   };
 const mapDispatchToProps = (dispatch: any) => ({
-    loginOut: () => {
-        message.info('退出成功');
-        dispatch(loginOut());
-    },
 });
 class App extends Component<any, comState> {
     constructor(props: any) {
@@ -49,7 +44,7 @@ class App extends Component<any, comState> {
         console.log(isDef(u));
         var array = [1];
         var other = (React as any)._.concat(array, 2, [3], [[4]]);
-        console.log(other)  
+        console.log(other);
     }
     handleClick = (test: string) => {
        this.setState({
@@ -71,7 +66,6 @@ class App extends Component<any, comState> {
                     <Link to="/admin/order/123" style={{color:'black'}}>
                     <div>点击跳转到order</div>
                     </Link>
-                    <Button type="primary" onClick={this.handleClick.bind(this, '123')}>退出登录</Button>
                     <p>版本号{VERSION}</p>
                 </header>
                 <p></p>
