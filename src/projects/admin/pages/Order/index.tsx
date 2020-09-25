@@ -3,7 +3,7 @@
  * @Author: qingyang
  * @Date: 2020-09-10 14:43:34
  * @LastEditors: qingyang
- * @LastEditTime: 2020-09-24 14:08:08
+ * @LastEditTime: 2020-09-25 13:57:09
  */
 import React, { Component } from "react";
 import { Link } from 'react-router-dom';
@@ -20,7 +20,6 @@ const mapDispatchToProps = (dispatch: any) => ({
 
  class Order extends Component<any,any> {
     render() {
-        debugger
         return (
             <div className="App-pc">
                 <div className="wrap">123</div>

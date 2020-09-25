@@ -3,7 +3,7 @@
  * @Author: qingyang
  * @Date: 2020-09-10 14:43:34
  * @LastEditors: qingyang
- * @LastEditTime: 2020-09-24 16:20:20
+ * @LastEditTime: 2020-09-25 16:42:28
  */
 import React, { Component } from "react";
 import logo from "@/assets/images/logo.svg";
@@ -20,7 +20,7 @@ interface comState {
 }
 interface comProps {
     userInfo: {
-        name: string
+        name: string,
     },
     loginOut: Function
 }
@@ -62,6 +62,7 @@ class App extends Component<any, comState> {
                     <div className={`${styles[test]} ${styles.line2}`}>1231312312321安静的干哈多久啊是都很难哈京东干啥 3123123</div>
                     <div className="wrap--test"></div>
                     <p  className="test">{this.props.userInfo.name? this.props.userInfo.name : '未登录'}</p>
+                    <p  className="test">{this.props.userInfo.phone? this.props.userInfo.phone : '未登录'}</p>
                     <img src={logo} className={styles['app--logo']} alt="logo" />
                     <Link to="/admin/order/123" style={{color:'black'}}>
                     <div>点击跳转到order</div>

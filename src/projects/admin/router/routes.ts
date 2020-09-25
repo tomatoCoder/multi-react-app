@@ -3,7 +3,7 @@
  * @Author: qingyang
  * @Date: 2020-09-23 17:35:58
  * @LastEditors: qingyang
- * @LastEditTime: 2020-09-24 14:07:25
+ * @LastEditTime: 2020-09-25 14:01:18
  */
 import { lazy }from "react";
 const loadRouter = (name: string) => {
@@ -18,6 +18,7 @@ const Notfound = loadRouter('Notfound');
 const Finance = loadRouter('Finance');
 const MainLayout = loadRouter('MainLayout');
 const routes = [
+   { path: '/', component: MainLayout, exact: true},
     { path: '/login', component: Login },
     //嵌套路由
     { path: '/admin', component: MainLayout,

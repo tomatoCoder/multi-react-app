@@ -3,38 +3,65 @@
  * @Author: qingyang
  * @Date: 2020-09-10 14:43:34
  * @LastEditors: qingyang
- * @LastEditTime: 2020-09-24 15:57:59
+ * @LastEditTime: 2020-09-25 16:50:36
  */
 import React, { Component } from "react";
 import {Button, Form, Input } from 'antd';
+import { verifyCodeImgUrl } from "@/config/api";
+import { randomLenNum } from "@/utils/base";
+import {loginAction} from '@/projects/admin/store/action'
+import { connect } from "react-redux";
 
 interface comState {
-    name: string,
-    psw: string
+    randomStr: string,
+    codeSrc: string
 }
 
 const layout = {
     labelCol: { span: 8 },
     wrapperCol: { span: 8 },
   };
+  const mapStateToProps = (state: any) => {
+    return {
+      userInfo: state.userInfo
+    };
+  };
+  const mapDispatchToProps = (dispatch: any) => ({
+    requestLogin: (params: any) => {
+        loginAction(dispatch,params).then(() => {
+            debugger
+        })
+    }
+  });
 class Login extends Component<any, comState> {
     constructor(props: any) {
         super(props);
         this.state = {
-            name: '123',
-            psw: ''  
+            randomStr: '',
+            codeSrc:''
         }
     }
     componentDidMount() {
-        
+        this.refreshCode();
+    }
+    refreshCode = ()=> {
+        let randomStr = randomLenNum(4, true)
+        let codeSrc = `${verifyCodeImgUrl}?timestamp=${randomStr}`;
+        this.setState({
+            randomStr,
+            codeSrc
+        })
     }
     onFinish = (values: any) => {
         //TODO 登录接口请求成功之后获取token
-        localStorage.setItem('token', '12313')
-        if(localStorage.getItem('token')){
-            //刷新页面用来重新渲染app节点
-             window.location.reload()
-        }
+        const params = {
+            username: values.username,
+            password: values.password,
+            captcha: values.captcha,
+            timestamp: this.state.randomStr
+        };
+        this.props.requestLogin(params);
+        return
       };
     
     onFinishFailed = (errorInfo: any) => {
@@ -43,12 +70,11 @@ class Login extends Component<any, comState> {
     render() {
         return (
             <div id="login">
-                <div className="wrap"></div>
                 <p style={{color:'red'}}>我是登录页面</p>
                 <Form
                     {...layout}
                     name="basic"
-                    initialValues={{ remember: true }}
+                    initialValues={{ remember: false }}
                     onFinish={this.onFinish}
                     onFinishFailed={this.onFinishFailed}
                     >
@@ -64,8 +90,16 @@ class Login extends Component<any, comState> {
                         name="password"
                         rules={[{ required: true, message: 'Please input your password!' }]}
                     >
+                        <Input type="password"/>
+                    </Form.Item>
+                    <Form.Item
+                        label="Captcha"
+                        name="captcha"
+                        rules={[{ required: true, message: 'Please input your verifyCode!' }]}
+                    >
                         <Input />
                     </Form.Item>
+                    <img alt="图片" src={this.state.codeSrc} onClick={this.refreshCode}/>
                     <Form.Item>
                         <Button type="primary" htmlType="submit">
                                 Submit
@@ -76,5 +110,4 @@ class Login extends Component<any, comState> {
         );
     }
 }
-
-export default Login
+export default connect(mapStateToProps, mapDispatchToProps)(Login)

@@ -3,7 +3,7 @@
  * @Author: qingyang
  * @Date: 2020-09-10 14:43:34
  * @LastEditors: qingyang
- * @LastEditTime: 2020-09-24 14:08:31
+ * @LastEditTime: 2020-09-25 13:56:51
  */
 import React, { Component } from "react";
 import { connect } from "react-redux";
@@ -22,7 +22,6 @@ const mapDispatchToProps = (dispatch: any) => ({
         console.log(this.props.match.params.id);
     }
     render() {
-        debugger
         return (
             <div className="App-pc">
                 财务模块

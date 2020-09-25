@@ -49,7 +49,6 @@ class App extends React.Component<any, IAppState> {
     let user = {
       id:1,
       name: '派大星',
-      token: '1231313'
     }
     this.props.setUserInfo(user); 
   }
