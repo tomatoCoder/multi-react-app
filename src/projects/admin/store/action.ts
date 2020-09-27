@@ -5,7 +5,7 @@ import { login } from '@/config/api';
  * @Author: qingyang
  * @Date: 2020-09-14 09:29:59
  * @LastEditors: qingyang
- * @LastEditTime: 2020-09-25 16:52:15
+ * @LastEditTime: 2020-09-27 15:39:33
  */
 
 import history from '@/utils/history'
@@ -42,18 +42,25 @@ export function loginOut() {
 
 
 
-export function loginAction(dispatch: any, params: any) {
-  return new Promise((resolve, reject) => {
+export function loginAction(params: any) {
+  return (dispatch: any) => {
     login(params).then((res: any) => {
-      localStorage.setItem('token', res);
-      history.push('/admin')
-      resolve(res);
-      getUserInfo().then((userInfo: any) => {
-        dispatch(addUser(userInfo));
-      })
-    }).catch((err: any) => {
-      reject(err);
+          localStorage.setItem('token', res);
+          history.push('/admin')
+          getUserInfo().then((userInfo: any) => {
+            dispatch(addUser(userInfo));
+          })
     })
-  })
-  
+  }
+}
+
+export function getUserAction(params: any) {
+  return (dispatch: any) => {
+          let token = localStorage.getItem('token');
+          if(token) {
+            getUserInfo().then((userInfo: any) => {
+              dispatch(addUser(userInfo));
+            })
+          }    
+  }
 }

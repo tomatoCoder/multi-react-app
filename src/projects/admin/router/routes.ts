@@ -3,7 +3,7 @@
  * @Author: qingyang
  * @Date: 2020-09-23 17:35:58
  * @LastEditors: qingyang
- * @LastEditTime: 2020-09-25 14:01:18
+ * @LastEditTime: 2020-09-27 16:15:23
  */
 import { lazy }from "react";
 const loadRouter = (name: string) => {

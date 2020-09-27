@@ -3,7 +3,7 @@
  * @Author: qingyang
  * @Date: 2020-09-10 14:43:34
  * @LastEditors: qingyang
- * @LastEditTime: 2020-09-25 16:50:36
+ * @LastEditTime: 2020-09-25 17:40:21
  */
 import React, { Component } from "react";
 import {Button, Form, Input } from 'antd';
@@ -28,9 +28,7 @@ const layout = {
   };
   const mapDispatchToProps = (dispatch: any) => ({
     requestLogin: (params: any) => {
-        loginAction(dispatch,params).then(() => {
-            debugger
-        })
+        dispatch(loginAction(params))
     }
   });
 class Login extends Component<any, comState> {

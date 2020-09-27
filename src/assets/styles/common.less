@@ -9,3 +9,40 @@
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
+.slide-enter {
+         transition: all 1s ease-out;
+    }
+    .slide-enter-active {
+        width: 240px;
+    }
+    .slide-exit {
+        transition: all 1s ease-out;
+     }
+   .slide-exit-active {
+        width: 160px;
+   }
+
+//进场动画
+  .star-enter {
+    opacity: 0.01;
+    transform: translateY(-100%) scale(0.75);
+    background: yellow;
+  }
+  .star-enter-active {
+    opacity: 1;
+    transform: translateY(0%) scale(1.25);
+    transition: all 3000ms ease-out;
+    background: green;
+  }
+
+//   出场动画
+  .star-exit {
+    opacity: 1;
+    transform: scale(1.25);
+  }
+  .star-exit-active {
+    opacity: 0;
+    transform: scale(10);
+    transition: all 3000ms ease-in;
+  }

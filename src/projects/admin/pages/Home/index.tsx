@@ -3,20 +3,22 @@
  * @Author: qingyang
  * @Date: 2020-09-10 14:43:34
  * @LastEditors: qingyang
- * @LastEditTime: 2020-09-25 16:42:28
+ * @LastEditTime: 2020-09-27 15:37:49
  */
 import React, { Component } from "react";
 import logo from "@/assets/images/logo.svg";
 // import "./index.module.less";
 
-import { isDef } from "@/utils/base";
 import { Link } from 'react-router-dom';
 import { VERSION } from "@/config/project.config";
 import { connect } from "react-redux";
+import {  Button } from 'antd';
+import { CSSTransition } from 'react-transition-group'
 const styles = require('./index.module.less');
 
 interface comState {
-    name: string
+    name: string,
+    focused: boolean
 }
 interface comProps {
     userInfo: {
@@ -29,37 +31,38 @@ const mapStateToProps = (state: any) => {
       userInfo: state.userInfo
     };
   };
-const mapDispatchToProps = (dispatch: any) => ({
-});
 class App extends Component<any, comState> {
     constructor(props: any) {
         super(props);
         this.state = {
-            name: '123'   
+            name: '123',
+            focused: false  
         }
     }
     componentDidMount() {
-        console.log(this.props);
-        let u = 1;
-        console.log(isDef(u));
         var array = [1];
         var other = (React as any)._.concat(array, 2, [3], [[4]]);
         console.log(other);
     }
-    handleClick = (test: string) => {
-       this.setState({
-           name: 'paidaxing',
-           
-       });
-       this.props.history.push('/login');
-       this.props.loginOut();
+    addListener = () => {
+
+    }
+    showWrap = () => {
+       
+        this.setState({
+            focused: !this.state.focused
+        })
     }
     render() {
         let test = 'wrap--test'
         return (
             <div className={styles.app}>
                 <header className="App-header">
-                    <div className={`${styles[test]} ${styles.line2}`}>1231312312321安静的干哈多久啊是都很难哈京东干啥 3123123</div>
+                    <CSSTransition in={this.state.focused} timout={500} classNames="star" addEndListener={this.addListener}
+　　　　　　　　　　unmountOnExit
+　　　　　　　　　　appear={true}>
+                        <div className={`${styles[test]} ${styles.line2}`}>1231312312321安静的干哈多久啊是都很难哈京东干啥 3123123</div>
+                    </CSSTransition>
                     <div className="wrap--test"></div>
                     <p  className="test">{this.props.userInfo.name? this.props.userInfo.name : '未登录'}</p>
                     <p  className="test">{this.props.userInfo.phone? this.props.userInfo.phone : '未登录'}</p>
@@ -67,6 +70,7 @@ class App extends Component<any, comState> {
                     <Link to="/admin/order/123" style={{color:'black'}}>
                     <div>点击跳转到order</div>
                     </Link>
+                    <Button onClick={this.showWrap}>展示动画</Button>
                     <p>版本号{VERSION}</p>
                 </header>
                 <p></p>
@@ -75,4 +79,4 @@ class App extends Component<any, comState> {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default connect(mapStateToProps)(App)
