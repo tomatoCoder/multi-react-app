@@ -43,7 +43,9 @@ class App extends React.Component<any, IAppState> {
   }
 
   componentDidUpdate(props: any) {
-    console.log(props.history);
+    console.log(props.history);    
+  }
+  componentDidMount() {
     this.props.requestUser();
   }
   handleClick = () => {
@@ -51,7 +53,7 @@ class App extends React.Component<any, IAppState> {
  }
  menuClick = (res:any) => {
    let { item, key, keyPath, domEvent } = res;
-  this.props.history.push(`/admin/${key}`)
+  // this.props.history.push(`/admin/${key}`)
  }
   public render() {
     const { routes } = this.props.route;
@@ -82,9 +84,11 @@ class App extends React.Component<any, IAppState> {
                 onClick={this.menuClick}
               >
                 <SubMenu key="sub1" icon={<UserOutlined />} title="subnav 1">
-                  <Menu.Item key="index">首页</Menu.Item>
-                  <Menu.Item key="order">订单</Menu.Item>
-                  <Menu.Item key="finance">财务</Menu.Item>
+                  <Menu.Item key="index">
+                     <Link to="/admin/index">首页</Link>
+                  </Menu.Item>
+                  <Menu.Item key="order"><Link to="/admin/order">订单</Link></Menu.Item>
+                  <Menu.Item key="finance"><Link to="/admin/finance">财务</Link></Menu.Item>
                 </SubMenu>
                 <SubMenu key="sub2" icon={<LaptopOutlined />} title="subnav 2">
                   <Menu.Item key="5">option5</Menu.Item>
