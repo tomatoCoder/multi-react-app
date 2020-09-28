@@ -3,11 +3,11 @@
  * @Author: qingyang
  * @Date: 2020-09-10 14:43:34
  * @LastEditors: qingyang
- * @LastEditTime: 2020-09-25 17:40:21
+ * @LastEditTime: 2020-09-28 10:35:15
  */
 import React, { Component } from "react";
 import {Button, Form, Input } from 'antd';
-import { verifyCodeImgUrl } from "@/config/api";
+import { verifyCodeImgUrl } from "@/apis";
 import { randomLenNum } from "@/utils/base";
 import {loginAction} from '@/projects/admin/store/action'
 import { connect } from "react-redux";

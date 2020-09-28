@@ -3,11 +3,12 @@
  * @Author: qingyang
  * @Date: 2020-09-23 17:35:58
  * @LastEditors: qingyang
- * @LastEditTime: 2020-09-27 16:15:23
+ * @LastEditTime: 2020-09-28 09:40:51
  */
 import { lazy }from "react";
+import loadable from '@/utils/loadable'
 const loadRouter = (name: string) => {
-    return lazy(() => import(/* webpackChunkName: "admin" */ `../pages/${name}/index`))
+    return loadable(() => import(/* webpackChunkName: "admin" */ `../pages/${name}/index`))
 }
 
 const Login = loadRouter('Login');
@@ -18,7 +19,6 @@ const Notfound = loadRouter('Notfound');
 const Finance = loadRouter('Finance');
 const MainLayout = loadRouter('MainLayout');
 const routes = [
-   { path: '/', component: MainLayout, exact: true},
     { path: '/login', component: Login },
     //嵌套路由
     { path: '/admin', component: MainLayout,
@@ -30,6 +30,7 @@ const routes = [
         { path: "/admin/order/order-detail/:id", component: OrderDetail, exact: true}
       ]
     },
+    { path: '/', component: MainLayout },
     { path: '*', component: Notfound },
   ]
    

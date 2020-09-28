@@ -9,7 +9,7 @@ import ReactDOM from 'react-dom';
 import * as serviceWorker from '@/serviceWorker';
 import  '@/config/ui.cofig'
 import '@/assets/styles/index.less';
-import { RouterView } from './router'
+import { RouterView } from './router/index'
 import _ from 'lodash'
 import React from "react";
 

@@ -1,11 +1,11 @@
-import { getUserInfo } from './../../../config/api';
-import { login } from '@/config/api';
+import { getUserInfo } from '@/apis';
+import { login } from '@/apis';
 /*
  * @Description: 
  * @Author: qingyang
  * @Date: 2020-09-14 09:29:59
  * @LastEditors: qingyang
- * @LastEditTime: 2020-09-27 15:39:33
+ * @LastEditTime: 2020-09-28 10:33:14
  */
 
 import history from '@/utils/history'

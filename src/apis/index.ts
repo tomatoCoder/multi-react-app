@@ -3,10 +3,10 @@
  * @Author: qingyang
  * @Date: 2020-09-14 15:16:29
  * @LastEditors: qingyang
- * @LastEditTime: 2020-09-25 15:23:28
+ * @LastEditTime: 2020-09-28 10:34:35
  */
-import { post, get, getBlob } from './api.config'
-import { BASE_URL } from './project.config';
+import { post, get, getBlob } from '@/config/http.config'
+import { BASE_URL } from '@/config/project.config';
 
 
 //登录
