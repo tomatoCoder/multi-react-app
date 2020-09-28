@@ -3,9 +3,11 @@ import { Layout, message, Button,Menu, Breadcrumb } from 'antd';
 import { Link } from 'react-router-dom';
 import { renderRoutes } from 'react-router-config';
 import { connect } from "react-redux";
-import {loginOut, addUser, User} from '@/projects/admin/store/action'
-import { getUserAction } from '@/projects/admin/store/action'
+import { getUserAction, loginOut } from '@/projects/admin/store/action'
 import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons';
+import logo from "@/assets/images/logo.svg";
+import SiderMenu from './SiderMenu'
+const styles = require('./index.module.less');
 
 const { SubMenu } = Menu;
 const { Header, Footer, Sider, Content } = Layout;
@@ -15,6 +17,8 @@ export interface IAppProps {
 }
 
 export interface IAppState {
+  openKeys: string,
+  selectedKeys: string
 }
 
 const mapStateToProps = (state: any) => {
@@ -38,7 +42,8 @@ class App extends React.Component<any, IAppState> {
     super(props);
 
     this.state = {
-
+      openKeys:'admin',
+      selectedKeys: 'order'
     }
   }
 
@@ -53,61 +58,52 @@ class App extends React.Component<any, IAppState> {
  }
  menuClick = (res:any) => {
    let { item, key, keyPath, domEvent } = res;
+   debugger
+   this.setState({
+      selectedKeys: key
+    })
   // this.props.history.push(`/admin/${key}`)
+ }
+ onOpenChange = () => {
+
  }
   public render() {
     const { routes } = this.props.route;
     return (
       <Layout>
         <Header className="header">
-          <div className="logo" />
-          <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
+        <img src={logo} className={styles['app--logo']} alt="logo" />
+          <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['1']}>
             <Menu.Item key="1">首页</Menu.Item>
             <Menu.Item key="2">订单</Menu.Item>
             <Menu.Item key="3">财务</Menu.Item>
           </Menu>
-          <Button type="primary" onClick={() => this.props.loginOut()}>退出登录</Button>
+          <Button className={styles.btn_logout} type="primary" onClick={() => this.props.loginOut()}>退出登录</Button>
         </Header>
-        <Content style={{ padding: '0 50px' }}>
-          <Breadcrumb style={{ margin: '16px 0' }}>
-            <Breadcrumb.Item>Home</Breadcrumb.Item>
-            <Breadcrumb.Item>List</Breadcrumb.Item>
-            <Breadcrumb.Item>App</Breadcrumb.Item>
-          </Breadcrumb>
-          <Layout className="site-layout-background" style={{ padding: '24px 0' }}>
+       
+         <Layout className="site-layout-background">
             <Sider className="site-layout-background" width={200}>
-              <Menu
-                mode="inline"
-                defaultSelectedKeys={['1']}
-                defaultOpenKeys={['sub1']}
-                style={{ height: '100%' }}
-                onClick={this.menuClick}
-              >
-                <SubMenu key="sub1" icon={<UserOutlined />} title="subnav 1">
-                  <Menu.Item key="index">
-                     <Link to="/admin/index">首页</Link>
-                  </Menu.Item>
-                  <Menu.Item key="order"><Link to="/admin/order">订单</Link></Menu.Item>
-                  <Menu.Item key="finance"><Link to="/admin/finance">财务</Link></Menu.Item>
-                </SubMenu>
-                <SubMenu key="sub2" icon={<LaptopOutlined />} title="subnav 2">
-                  <Menu.Item key="5">option5</Menu.Item>
-                  <Menu.Item key="6">option6</Menu.Item>
-                  <Menu.Item key="7">option7</Menu.Item>
-                  <Menu.Item key="8">option8</Menu.Item>
-                </SubMenu>
-                <SubMenu key="sub3" icon={<NotificationOutlined />} title="subnav 3">
-                  <Menu.Item key="9">option9</Menu.Item>
-                  <Menu.Item key="10">option10</Menu.Item>
-                  <Menu.Item key="11">option11</Menu.Item>
-                  <Menu.Item key="12">option12</Menu.Item>
-                </SubMenu>
-              </Menu>
+               <SiderMenu  {...this.props}></SiderMenu>
             </Sider>
-            <Content style={{ padding: '0 24px', minHeight: 280 }}>{renderRoutes(routes)}</Content>
+            <Layout style={{ padding: '0 24px 24px' }}>
+              <Breadcrumb style={{ margin: '16px 0' }}>
+                <Breadcrumb.Item>Home</Breadcrumb.Item>
+                <Breadcrumb.Item>List</Breadcrumb.Item>
+                <Breadcrumb.Item>App</Breadcrumb.Item>
+              </Breadcrumb>
+              <Content
+                className="site-layout-background"
+                style={{
+                  padding: 24,
+                  margin: 0,
+                  minHeight: 360,
+                }}
+              >
+                {renderRoutes(routes)}
+              </Content>
+              <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
+            </Layout>
           </Layout>
-        </Content>
-        <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
       </Layout>
     );
   }

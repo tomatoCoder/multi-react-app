@@ -3,7 +3,7 @@
  * @Author: qingyang
  * @Date: 2020-09-10 14:43:34
  * @LastEditors: qingyang
- * @LastEditTime: 2020-09-28 10:35:15
+ * @LastEditTime: 2020-09-28 13:57:15
  */
 import React, { Component } from "react";
 import {Button, Form, Input } from 'antd';
@@ -11,6 +11,7 @@ import { verifyCodeImgUrl } from "@/apis";
 import { randomLenNum } from "@/utils/base";
 import {loginAction} from '@/projects/admin/store/action'
 import { connect } from "react-redux";
+const styles = require('./index.module.less');
 
 interface comState {
     randomStr: string,
@@ -18,8 +19,8 @@ interface comState {
 }
 
 const layout = {
-    labelCol: { span: 8 },
-    wrapperCol: { span: 8 },
+    labelCol: { span: 6 },
+    // wrapperCol: { span: 16 },
   };
   const mapStateToProps = (state: any) => {
     return {
@@ -67,43 +68,50 @@ class Login extends Component<any, comState> {
       };
     render() {
         return (
-            <div id="login">
-                <p style={{color:'red'}}>我是登录页面</p>
-                <Form
-                    {...layout}
-                    name="basic"
-                    initialValues={{ remember: false }}
-                    onFinish={this.onFinish}
-                    onFinishFailed={this.onFinishFailed}
-                    >
-                    <Form.Item
-                        label="Username"
-                        name="username"
-                        rules={[{ required: true, message: 'Please input your username!' }]}
-                    >
-                        <Input />
-                    </Form.Item>
-                    <Form.Item
-                        label="Password"
-                        name="password"
-                        rules={[{ required: true, message: 'Please input your password!' }]}
-                    >
-                        <Input type="password"/>
-                    </Form.Item>
-                    <Form.Item
-                        label="Captcha"
-                        name="captcha"
-                        rules={[{ required: true, message: 'Please input your verifyCode!' }]}
-                    >
-                        <Input />
-                    </Form.Item>
-                    <img alt="图片" src={this.state.codeSrc} onClick={this.refreshCode}/>
-                    <Form.Item>
-                        <Button type="primary" htmlType="submit">
-                                Submit
-                        </Button>
-                    </Form.Item>
-                </Form>
+            <div className={styles.login_wrap}>
+                <div className={styles.bg_wrap}>131</div>
+                <div className={styles.form_wrap}>
+                    <div className={styles.form}>
+                    <h1>xxx管理系统</h1>
+                    <Form
+                        {...layout}
+                        name="basic"
+                        labelAlign="left"
+                        initialValues={{ remember: false }}
+                        onFinish={this.onFinish}
+                        onFinishFailed={this.onFinishFailed}
+                        >
+                        <Form.Item
+                            label="Username"
+                            name="username"
+                            rules={[{ required: true, message: 'Please input your username!' }]}
+                        >
+                            <Input />
+                        </Form.Item>
+                        <Form.Item
+                            label="Password"
+                            name="password"
+                            rules={[{ required: true, message: 'Please input your password!' }]}
+                        >
+                            <Input type="password"/>
+                        </Form.Item>
+                        <Form.Item label="Captcha">
+                            <Form.Item
+                                name="captcha"
+                                noStyle
+                                rules={[{ required: true, message: 'Please input your verifyCode!' }]}
+                            >
+                            <Input className={styles.input_code} />
+                            </Form.Item>
+                            <img alt="图片" src={this.state.codeSrc} onClick={this.refreshCode}/>
+                        </Form.Item>
+                            <Button type="primary" htmlType="submit" className={styles.btn_login}>
+                                    Submit
+                            </Button>
+                    </Form>
+                    </div>
+                </div>
+                
             </div>
         );
     }

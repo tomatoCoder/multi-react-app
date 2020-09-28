@@ -6,7 +6,7 @@
  * @Author: qingyang
  * @Date: 2020-09-10 13:36:58
  * @LastEditors: qingyang
- * @LastEditTime: 2020-09-28 09:53:53
+ * @LastEditTime: 2020-09-28 14:55:48
  */
 import React, { Suspense }from "react";
 import { Provider } from "react-redux";
@@ -30,7 +30,7 @@ export const RouterView =
           <Switch>
             {renderRoutes(routes)} 
           </Switch>
-          <Redirect exact from="/" to="/admin" />
+          {/* <Redirect exact from="/" to="/admin" /> */}
         </Router> 
     </Provider>
 

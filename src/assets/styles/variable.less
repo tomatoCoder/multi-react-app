@@ -5,10 +5,13 @@
 
 
 
+
+// mixin 
 .wh(@w,@h:@w){
     width:@w;
     height: @h;
 }
+
 // 多行超出文本...
 .line-ellipsisRows(@val:2){
     display: -webkit-box; 
@@ -16,4 +19,10 @@
     overflow: hidden;
     /*! autoprefixer: ignore next */
     -webkit-box-orient: vertical;
+}
+
+.flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

@@ -5,7 +5,7 @@ import { login } from '@/apis';
  * @Author: qingyang
  * @Date: 2020-09-14 09:29:59
  * @LastEditors: qingyang
- * @LastEditTime: 2020-09-28 10:33:14
+ * @LastEditTime: 2020-09-28 11:19:48
  */
 
 import history from '@/utils/history'
@@ -36,7 +36,7 @@ export function addUser(data: User) {
 
 export function loginOut() {
   localStorage.removeItem('token');
-  history.replace('/login')
+  history.replace('/login');
   return { type: LOGIN_OUT,data: {}}
 }
 
@@ -61,6 +61,8 @@ export function getUserAction(params: any) {
             getUserInfo().then((userInfo: any) => {
               dispatch(addUser(userInfo));
             })
+          }else {
+            history.replace('/login');
           }    
   }
 }
