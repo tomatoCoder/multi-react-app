@@ -8,7 +8,8 @@ export interface IAppProps {
 }
 
 export interface IAppState {
-    openKeys: string,
+    rootSubmenuKeys: string[]
+    openKeys: string[],
     selectedKeys: string
 }
 
@@ -16,8 +17,9 @@ export default class SliderMenu extends React.Component<any, IAppState> {
   constructor(props: IAppProps) {
     super(props);
     this.state = {
-        openKeys:'',
-        selectedKeys: 'r'
+        rootSubmenuKeys: [],
+        openKeys:[],
+        selectedKeys: ''
       }
   }
   menuClick = (res:any) => {
@@ -25,15 +27,18 @@ export default class SliderMenu extends React.Component<any, IAppState> {
     this.setState({
        selectedKeys: key
      })
-     let path = keyPath.reverse().join('');
-     this.props.history.push(path)
+     this.props.history.push(key)
   }
-  onOpenChange = () => {
- 
+  onOpenChange = (openKeys: any) => {
+    this.setState({ openKeys });
+     
   }
   componentDidMount() {
-      let pathname = this.props.history.location.pathname;
-      let rank = pathname.split('/');
+    this.initSliderMenu();  
+  }
+  initSliderMenu = () => {
+    let pathname = this.props.history.location.pathname;
+    let rank = pathname.split('/');
       switch (rank.length) {
         case 2:  //一级目录
             this.setState({
@@ -41,75 +46,91 @@ export default class SliderMenu extends React.Component<any, IAppState> {
             })
             break;
         case 3: //二级目录，要展开一个subMenu
-        console.log(`/${rank[2]}`)
-        debugger
             this.setState({
-                selectedKeys: `/${rank[2]}`,
-                openKeys: rank.slice(0, 2).join('/')
+                selectedKeys: pathname,
+                openKeys: [rank.slice(0, 2).join('/')]
             })
             break;
         case 4: //三级目录，要展开两个subMenu
             this.setState({
-                selectedKeys: rank[3],
-                // openKeys: [rank.slice(0, 2).join('/'), rank.slice(0, 3).join('/')]
+                selectedKeys: pathname,
+                openKeys: [rank.slice(0, 2).join('/'), rank.slice(0, 3).join('/')]
             })
             break; 
       }
   }
+  renderMenu = (menuList: Array<any>) => {
+    return menuList.map(item => {
+      if (!item.children) {
+          return (
+              <Menu.Item key={item.path}  icon={item.icon ?  <item.icon /> : null}>
+                 {item.name}
+              </Menu.Item>
+          )
+      } else {
+        
+          this.state.rootSubmenuKeys.push(item.path);
+          console.log(this.state.rootSubmenuKeys);
+          const path = this.props.location.pathname
+          // 查找一个与当前请求路径匹配的子Item
+          const cItem = item.children.find((cItem: any) => path.indexOf(cItem.key) === 0)
+          // 如果存在, 说明当前item的子列表需要打开
+          if (cItem) {
+            this.setState({
+              openKeys: [cItem.path],
+            });
+          }
+          return (
+              <SubMenu
+                  key={item.path}
+                  icon={item.icon? <item.icon /> : null}
+                  title={item.name}
+              >
+                  {this.renderMenu(item.children)}
+              </SubMenu>
+          )
+      }
+  })
+}
   public render() {
     let menuJson = [{
         path :'/admin',
         name: 'subna1',
+        icon: UserOutlined,
         children: [{
-          path: '/index',
-          name: '首页',
+          path: '/admin/index',
+          name: '首页'
         },
         {
-          path: '/order',
+          path: '/admin/order',
           name: '订单',
         },
         {
-          path: '/finance',
+          path: '/admin/finance',
           name: '财务',
+          children: [{
+            path: '/admin/finance/detail',
+            name: '详情'
+          }]
         }]
       },
       {
         path :'/subnav2',
         name: 'subnav2',
-        children: [{
-          path: '/1',
-          name: '子菜单1',
-        },
-        {
-          path: '/2',
-          name: '子菜单2',
-        },
-        {
-          path: '/3',
-          name: '子菜单3',
-        }]
+        icon: LaptopOutlined
       }  
     ]
     return (
         <Menu
           mode="inline"
-          openKeys={[this.state.openKeys]}
+          openKeys={this.state.openKeys}
           selectedKeys={[this.state.selectedKeys]}
-          // onOpenChange={this.onOpenChange}
+          onOpenChange={this.onOpenChange}
           style={{ height: '100%' }}
           onClick={this.menuClick}
         >
         {
-          menuJson.map((item) => {
-             return <SubMenu key={item.path} icon={<UserOutlined />} title={item.name}>
-                        {item.children ?
-                        item.children.map((child) => {
-                          return  <Menu.Item key={child.path}>{child.name}</Menu.Item>
-                        }) : null
-                             
-                      }
-                    </SubMenu> 
-          })
+          this.renderMenu(menuJson)
         }
       </Menu>
     );
