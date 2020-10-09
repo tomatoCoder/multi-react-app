@@ -93,23 +93,26 @@ export default class SliderMenu extends React.Component<any, IAppState> {
   })
 }
   public render() {
-    let menuJson = [{
-        path :'/admin',
+    let menuJson = [
+      
+      {
+        path: '/admin/index',
+        name: '首页',
+        icon: LaptopOutlined
+      },{
+        path :'/admin/subna1',
         name: 'subna1',
         icon: UserOutlined,
-        children: [{
-          path: '/admin/index',
-          name: '首页'
-        },
+        children: [
         {
-          path: '/admin/order',
+          path: '/admin/subna1/order',
           name: '订单',
         },
         {
-          path: '/admin/finance',
+          path: '/admin/subna1/finance',
           name: '财务',
           children: [{
-            path: '/admin/finance/detail',
+            path: '/admin/subna1/finance/detail',
             name: '详情'
           }]
         }]

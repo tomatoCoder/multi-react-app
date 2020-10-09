@@ -26,23 +26,64 @@
 //进场动画
   .star-enter {
     opacity: 0.01;
-    transform: translateY(-100%) scale(0.75);
-    background: yellow;
+    // transform: translateY(-100%) scale(0.75);
+    // background: yellow;
   }
   .star-enter-active {
     opacity: 1;
-    transform: translateY(0%) scale(1.25);
-    transition: all 3000ms ease-out;
-    background: green;
+    // transform: translateY(0%) scale(1.25);
+    transition: all 3s ease-out;
   }
 
 //   出场动画
   .star-exit {
-    opacity: 1;
-    transform: scale(1.25);
+    opacity: 0;
+    // transform: scale(1.25);
   }
   .star-exit-active {
     opacity: 0;
-    transform: scale(10);
-    transition: all 3000ms ease-in;
+    // transform: scale(10);
+    // transition: all 3000ms ease-in;
   }
+  .fade-enter {
+    opacity: 0;
+  }
+   
+  .fade-enter.fade-enter-active {
+    opacity: 1;
+    transition: opacity 300ms ease-in;
+  }
+   
+  .fade-exit {
+    opacity: 1;
+  }
+   
+  .fade-exit.fade-exit-active {
+    opacity: 0;
+    transition: opacity 300ms ease-in;
+  }
+
+
+
+  .page-enter {
+    opacity: 0;
+    transform: scale(1.1);
+  }
+  
+  .page-enter-active {
+    opacity: 1;
+    transform: scale(1);
+    transition: opacity 300ms, transform 300ms;
+  }
+  
+  .page-exit {
+    opacity: 1;
+    // transform: scale(1);
+  }
+  
+  .page-exit-active {
+    opacity: 0;
+    // transform: scale(0.9);
+    // transition: opacity 300ms, transform 300ms;
+  }
+  

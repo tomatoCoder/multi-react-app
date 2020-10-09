@@ -3,7 +3,7 @@
  * @Author: qingyang
  * @Date: 2020-09-23 17:38:04
  * @LastEditors: qingyang
- * @LastEditTime: 2020-09-30 17:34:01
+ * @LastEditTime: 2020-10-09 17:49:05
  */
 'use strict';
 import {  Redirect  } from "react-router-dom";
@@ -13,6 +13,32 @@ function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'defau
 var reactRouter = require('react-router');
 var React = _interopDefault(require('react'));
 
+function matchRoutes(routes, pathname,
+  /*not public API*/
+  branch) {
+    if (branch === void 0) {
+      branch = [];
+    }
+  
+    routes.some(function (route) {
+      var match = route.path ? reactRouter.matchPath(pathname, route) : branch.length ? branch[branch.length - 1].match // use parent match
+      : reactRouter.Router.computeRootMatch(pathname); // use default "root" match
+  
+      if (match) {
+        branch.push({
+          route: route,
+          match: match
+        });
+  
+        if (route.routes) {
+          matchRoutes(route.routes, pathname, branch);
+        }
+      }
+  
+      return match;
+    });
+    return branch;
+  }
 function _extends() {
   _extends = Object.assign || function (target) {
     for (var i = 1; i < arguments.length; i++) {
@@ -31,7 +57,7 @@ function _extends() {
   return _extends.apply(this, arguments);
 }
 
-export function renderRoutes(routes, extraProps, switchProps) {
+ function renderRoutes(routes, extraProps, switchProps) {
   if (extraProps === void 0) {
     extraProps = {};
   }
@@ -42,7 +68,7 @@ export function renderRoutes(routes, extraProps, switchProps) {
 
   return routes ? React.createElement(reactRouter.Switch, switchProps, routes.map(function (route, i) {
     if(route.redirect) {
-      return  <Redirect exact={route.exact} from={route.path} to={route.redirect} /> 
+      return  <Redirect exact={route.exact} from={route.path} to={route.redirect} key={route.key || i}/> 
     }
     return React.createElement(reactRouter.Route, {
       key: route.key || i,
@@ -53,9 +79,12 @@ export function renderRoutes(routes, extraProps, switchProps) {
         return route.render ? route.render(_extends({}, props, {}, extraProps, {
           route: route
         })) : React.createElement(route.component, _extends({}, props, extraProps, {
-          route: route
+          route: route,
+          name: route.breadcrumbName
         }));
       }
     });
   })) : null;
 }
+
+export  {renderRoutes, matchRoutes}

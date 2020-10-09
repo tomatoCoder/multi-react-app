@@ -2,12 +2,14 @@ import * as React from 'react';
 import { Layout, message, Button,Menu, Breadcrumb } from 'antd';
 import { Link } from 'react-router-dom';
 // import { renderRoutes } from 'react-router-config';
-import { renderRoutes } from '@/projects/admin/router/router-config';
-
+import { renderRoutes, matchRoutes } from '@/projects/admin/router/router-config';
+import { breadcrumbNameMap } from '@/projects/admin/router/bread-config';
 import { connect } from "react-redux";
 import { getUserAction, loginOut } from '@/projects/admin/store/action'
 import logo from "@/assets/images/logo.svg";
 import SiderMenu from './SiderMenu'
+import { CSSTransition,TransitionGroup } from 'react-transition-group'
+
 const styles = require('./index.module.less');
 
 const { Header, Footer, Sider, Content } = Layout;
@@ -16,7 +18,8 @@ export interface IAppProps {
 }
 
 export interface IAppState {
-  collapsed: boolean
+  collapsed: boolean,
+  show: boolean
 }
 
 const mapStateToProps = (state: any) => {
@@ -35,39 +38,46 @@ const mapDispatchToProps = (dispatch: any) => ({
   },
   
 })
-const breadcrumbNameMap = {
-  '/admin': 'subna1',
-  '/admin/index': '首页',
-  '/admin/order': '订单',
-  '/admin/finance': '财务',
-  '/admin/finance/detail': 'Detail',
-}
+
 class App extends React.Component<any, IAppState> {
   constructor(props: IAppProps) {
     super(props);
-
     this.state = {
-      collapsed: false
+      collapsed: false,
+      show: false
     }
   }
   componentDidMount() {
     this.props.requestUser();
+    this.setState({
+      show: !this.state.show
+    })
   }
   handleClick = () => {
     this.props.loginOut();
  }
  onCollapse = (collapsed: boolean) => {
-  console.log(collapsed);
   this.setState({ collapsed });
+}
+showWrap = () => {     
+  this.setState({
+    show: true
+  })
+}
+addListener = () => {
+
 }
   public render() {
     const { location } = this.props;
+    debugger
     const pathSnippets = location.pathname.split('/').filter((i: any) => i);
-    const extraBreadcrumbItems = pathSnippets.map((_: any, index: number) => {
-      const url:string = `/${pathSnippets.slice(0, index + 1).join('/')}`;
+    let breadArr = (React as any)._.drop(pathSnippets);
+    const extraBreadcrumbItems = breadArr.map((_: any, index: number) => {
+      const url:string = `/${breadArr.slice(0, index + 1).join('/')}`;
+      debugger
       return (
         <Breadcrumb.Item key={url}>
-          {index === pathSnippets - 1? (breadcrumbNameMap as any)[url] : <Link to={url}>{(breadcrumbNameMap as any)[url]}</Link>}
+          {index === breadArr - 1? (breadcrumbNameMap as any)[url] : <Link to={'/admin'+url}>{(breadcrumbNameMap as any)[url]}</Link>}
         </Breadcrumb.Item>
       );
     });
@@ -77,6 +87,9 @@ class App extends React.Component<any, IAppState> {
       </Breadcrumb.Item>,
     ].concat(extraBreadcrumbItems);
     const { routes } = this.props.route;
+
+    const matchedRoutes = matchRoutes(routes, location.pathname);
+    debugger
     return (
       <Layout>
         <Header className={styles.header}>
@@ -103,10 +116,22 @@ class App extends React.Component<any, IAppState> {
                   margin: 0,
                   minHeight: 360,
                 }}
-              >
-                {renderRoutes(routes)}
+              >  
+              <TransitionGroup>
+                <CSSTransition
+                    in={location.pathname != null}
+                    timeout={300}
+                    classNames="page"
+                    unmountOnExit
+                    key={location.pathname}
+                  >
+                    <div className="page" >
+                      {renderRoutes(routes)} 
+                    </div>
+                  </CSSTransition>
+                </TransitionGroup>
+                <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
               </Content>
-              <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
             </Layout>
           </Layout>
       </Layout>
