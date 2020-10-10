@@ -3,7 +3,7 @@
  * @Author: qingyang
  * @Date: 2020-09-23 17:35:58
  * @LastEditors: qingyang
- * @LastEditTime: 2020-10-09 17:59:28
+ * @LastEditTime: 2020-10-10 09:57:35
  */
 import loadable from '@/utils/loadable'
 const loadRouter = (name: string) => {
@@ -25,10 +25,10 @@ const routes = [
       routes: [
         { path: "/admin/index", component: Home ,exact: true, breadcrumbName: '首页'},
         { path: "/admin/subna1", component: Subna1, breadcrumbName: 'subna1',routes: [
-          { path: "/admin/subna1/order", component: Order, exact: true, breadcrumbName: '订单页'},
+          { path: "/admin/subna1/order", component: Order, breadcrumbName: '订单页', routes: [
+            { path: "/admin/subna1/order/order-detail", component: OrderDetail, exact: true,breadcrumbName: '订单详情页'}
+          ]},
         ]},
-        { path: "/admin/subna1/finance/detail", component: Finance,exact: true, breadcrumbName: '详情页'},
-        { path: "/admin/subna1/order/order-detail/:id", component: OrderDetail, exact: true},
         { path: "/admin", redirect: "/admin/index", exact: true},
       ]
     },

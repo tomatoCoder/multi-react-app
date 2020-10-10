@@ -120,7 +120,7 @@ export default class SliderMenu extends React.Component<any, IAppState> {
       {
         path :'/subnav2',
         name: 'subnav2',
-        icon: LaptopOutlined
+        icon: NotificationOutlined
       }  
     ]
     return (

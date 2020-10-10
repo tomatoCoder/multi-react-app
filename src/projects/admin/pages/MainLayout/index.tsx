@@ -1,9 +1,7 @@
 import * as React from 'react';
 import { Layout, message, Button,Menu, Breadcrumb } from 'antd';
 import { Link } from 'react-router-dom';
-// import { renderRoutes } from 'react-router-config';
 import { renderRoutes, matchRoutes } from '@/projects/admin/router/router-config';
-import { breadcrumbNameMap } from '@/projects/admin/router/bread-config';
 import { connect } from "react-redux";
 import { getUserAction, loginOut } from '@/projects/admin/store/action'
 import logo from "@/assets/images/logo.svg";
@@ -69,27 +67,20 @@ addListener = () => {
 }
   public render() {
     const { location } = this.props;
-    debugger
-    const pathSnippets = location.pathname.split('/').filter((i: any) => i);
-    let breadArr = (React as any)._.drop(pathSnippets);
-    const extraBreadcrumbItems = breadArr.map((_: any, index: number) => {
-      const url:string = `/${breadArr.slice(0, index + 1).join('/')}`;
-      debugger
+    const { routes } = this.props.route;
+    const matchedRoutes = matchRoutes(routes, location.pathname);
+    const extraBreadcrumbItems = matchedRoutes.map((item: any, index: number) => {
       return (
-        <Breadcrumb.Item key={url}>
-          {index === breadArr - 1? (breadcrumbNameMap as any)[url] : <Link to={'/admin'+url}>{(breadcrumbNameMap as any)[url]}</Link>}
+        <Breadcrumb.Item key={item.route.path}>
+          {index === matchedRoutes.length - 1? item.route.breadcrumbName : <Link to={item.route.path}>{item.route.breadcrumbName}</Link>}
         </Breadcrumb.Item>
       );
-    });
+    })
     const breadcrumbItems = [
       <Breadcrumb.Item key="home">
         <Link to="/">Home</Link>
       </Breadcrumb.Item>,
     ].concat(extraBreadcrumbItems);
-    const { routes } = this.props.route;
-
-    const matchedRoutes = matchRoutes(routes, location.pathname);
-    debugger
     return (
       <Layout>
         <Header className={styles.header}>
