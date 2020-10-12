@@ -3,7 +3,7 @@
  * @Author: qingyang
  * @Date: 2020-09-10 14:43:34
  * @LastEditors: qingyang
- * @LastEditTime: 2020-09-27 15:37:49
+ * @LastEditTime: 2020-10-12 15:28:29
  */
 import React, { Component } from "react";
 import logo from "@/assets/images/logo.svg";
@@ -14,11 +14,14 @@ import { VERSION } from "@/config/project.config";
 import { connect } from "react-redux";
 import {  Button } from 'antd';
 import { CSSTransition } from 'react-transition-group'
+import Texty from 'rc-texty';
+
 const styles = require('./index.module.less');
 
 interface comState {
     name: string,
-    focused: boolean
+    focused: boolean,
+    show: boolean
 }
 interface comProps {
     userInfo: {
@@ -36,7 +39,8 @@ class App extends Component<any, comState> {
         super(props);
         this.state = {
             name: '123',
-            focused: false  
+            focused: false,
+            show: false  
         }
     }
     componentDidMount() {
@@ -53,6 +57,11 @@ class App extends Component<any, comState> {
             focused: !this.state.focused
         })
     }
+    onClick = () => {
+        this.setState({
+          show: !this.state.show
+        });
+      }
     render() {
         let test = 'wrap--test'
         return (
