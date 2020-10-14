@@ -3,7 +3,7 @@
  * @Author: qingyang
  * @Date: 2020-09-10 14:43:34
  * @LastEditors: qingyang
- * @LastEditTime: 2020-10-12 17:17:40
+ * @LastEditTime: 2020-10-14 10:28:23
  */
 import React, { Component } from "react";
 import { Link } from 'react-router-dom';
@@ -15,6 +15,7 @@ import QueueAnim from 'rc-queue-anim'
 import TweenOne from 'rc-tween-one';
 import BezierPlugin from 'rc-tween-one/lib/plugin/BezierPlugin';
 import PathPlugin from 'rc-tween-one/lib/plugin/PathPlugin';
+import QyFilterBar from '@/components/QyFilterBar'
 import 'rc-texty/assets/index.css'
 
 import './index.less'
@@ -281,117 +282,12 @@ const mapDispatchToProps = (dispatch) => ({
             english: 89,
           },
           {
-            key: '1',
+            key: '5',
             name: 'John Brown',
             chinese: 98,
             math: 60,
             english: 70,
-          },
-          {
-            key: '2',
-            name: 'Jim Green',
-            chinese: 98,
-            math: 66,
-            english: 89,
-          },
-          {
-            key: '3',
-            name: 'Joe Black',
-            chinese: 98,
-            math: 90,
-            english: 70,
-          },
-          {
-            key: '4',
-            name: 'Jim Red',
-            chinese: 88,
-            math: 99,
-            english: 89,
-          },
-          {
-            key: '1',
-            name: 'John Brown',
-            chinese: 98,
-            math: 60,
-            english: 70,
-          },
-          {
-            key: '2',
-            name: 'Jim Green',
-            chinese: 98,
-            math: 66,
-            english: 89,
-          },
-          {
-            key: '3',
-            name: 'Joe Black',
-            chinese: 98,
-            math: 90,
-            english: 70,
-          },
-          {
-            key: '4',
-            name: 'Jim Red',
-            chinese: 88,
-            math: 99,
-            english: 89,
-          },
-          {
-            key: '1',
-            name: 'John Brown',
-            chinese: 98,
-            math: 60,
-            english: 70,
-          },
-          {
-            key: '2',
-            name: 'Jim Green',
-            chinese: 98,
-            math: 66,
-            english: 89,
-          },
-          {
-            key: '3',
-            name: 'Joe Black',
-            chinese: 98,
-            math: 90,
-            english: 70,
-          },
-          {
-            key: '4',
-            name: 'Jim Red',
-            chinese: 88,
-            math: 99,
-            english: 89,
-          },
-          {
-            key: '1',
-            name: 'John Brown',
-            chinese: 98,
-            math: 60,
-            english: 70,
-          },
-          {
-            key: '2',
-            name: 'Jim Green',
-            chinese: 98,
-            math: 66,
-            english: 89,
-          },
-          {
-            key: '3',
-            name: 'Joe Black',
-            chinese: 98,
-            math: 90,
-            english: 70,
-          },
-          {
-            key: '4',
-            name: 'Jim Red',
-            chinese: 88,
-            math: 99,
-            english: 89,
-          },
+          }
         ];
           const rowSelection = {
             onChange: (selectedRowKeys, selectedRows) => {
@@ -405,6 +301,7 @@ const mapDispatchToProps = (dispatch) => ({
         return (
             location.pathname !== routes[0].path ?
                 <div className="order">
+                  <QyFilterBar></QyFilterBar>
                   <Table 
                       columns={columns} 
                       dataSource={data} 
