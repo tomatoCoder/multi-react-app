@@ -3,7 +3,7 @@
  * @Author: qingyang
  * @Date: 2020-10-14 10:25:01
  * @LastEditors: qingyang
- * @LastEditTime: 2020-10-14 13:40:25
+ * @LastEditTime: 2020-10-14 15:17:14
  */
 import * as React from 'react';
 import {
@@ -15,7 +15,8 @@ import {
     Row, Col,
     Select,  } from 'antd';
 
-const styles = require('./index.module.less');
+// const styles = require('./index.module.less');
+import  './index.module.less'
 const { Option } = Select;
 export default class App extends React.Component {
   constructor(props) {
@@ -36,7 +37,7 @@ export default class App extends React.Component {
   };
  render() {
     return (
-      <div className={styles.serach_wrap}>
+      <div styleName="serach">
         <Form
             labelCol={{ span: 5 }}
             // wrapperCol={{

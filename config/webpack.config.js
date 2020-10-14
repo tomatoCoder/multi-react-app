@@ -522,7 +522,8 @@ module.exports = function(webpackEnv) {
                   importLoaders: 3,
                   sourceMap: isEnvProduction && shouldUseSourceMap,
                   modules: {
-                    getLocalIdent: getCSSModuleLocalIdent,
+                    // getLocalIdent: getCSSModuleLocalIdent,
+                    localIdentName: '[local]-[hash:base64:5]'
                   },
                 },
                 'sass-loader'
@@ -539,7 +540,7 @@ module.exports = function(webpackEnv) {
                 {
                     loader: "style-resources-loader",
                     options: {
-                      patterns: path.join(__dirname, "../src/assets/styles/index.less"),
+                      patterns: path.join(__dirname, "../src/assets/styles/variable.less"),
                       injector: 'append'
                     }
                 }
@@ -548,11 +549,13 @@ module.exports = function(webpackEnv) {
             },
             {
               test: lessModuleRegex,
+              include: lessModuleRegex,
               use: getStyleLoaders({
-                importLoaders: 3,
+                importLoaders: 2,
                 sourceMap: isEnvProduction && shouldUseSourceMap,
                 modules: {
-                  getLocalIdent: getCSSModuleLocalIdent
+                  // getLocalIdent: getCSSModuleLocalIdent
+                  localIdentName: '[local]-[hash:base64:5]'
                 }
               }, 'less-loader').concat([
                 {
