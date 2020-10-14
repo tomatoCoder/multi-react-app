@@ -44,7 +44,7 @@ $http.interceptors.response.use(response => {
     const msg = response.data ? response.data.message : '';
 	if(statusCode === 200) {
         // 如果是文件流直接返回
-        if(response.request && response.request.responseType == 'blob') {
+        if(response.request && response.request.responseType === 'blob') {
             return response;
         }
         const code = response.data.code;

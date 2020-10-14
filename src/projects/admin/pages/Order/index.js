@@ -3,7 +3,7 @@
  * @Author: qingyang
  * @Date: 2020-09-10 14:43:34
  * @LastEditors: qingyang
- * @LastEditTime: 2020-10-14 10:28:23
+ * @LastEditTime: 2020-10-14 17:31:13
  */
 import React, { Component } from "react";
 import { Link } from 'react-router-dom';
@@ -13,7 +13,6 @@ import { renderRoutes } from '@/projects/admin/router/router-config';
 import Texty from 'rc-texty';
 import QueueAnim from 'rc-queue-anim'
 import TweenOne from 'rc-tween-one';
-import BezierPlugin from 'rc-tween-one/lib/plugin/BezierPlugin';
 import PathPlugin from 'rc-tween-one/lib/plugin/PathPlugin';
 import QyFilterBar from '@/components/QyFilterBar'
 import 'rc-texty/assets/index.css'
@@ -289,15 +288,15 @@ const mapDispatchToProps = (dispatch) => ({
             english: 70,
           }
         ];
-          const rowSelection = {
-            onChange: (selectedRowKeys, selectedRows) => {
-              console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
-            },
-            getCheckboxProps: (record) => ({
-              disabled: record.age === 32, // Column configuration not to be checked
-              name: record.name,
-            }),
-          };
+          // const rowSelection = {
+          //   onChange: (selectedRowKeys, selectedRows) => {
+          //     console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
+          //   },
+          //   getCheckboxProps: (record) => ({
+          //     disabled: record.age === 32, // Column configuration not to be checked
+          //     name: record.name,
+          //   }),
+          // };
         return (
             location.pathname !== routes[0].path ?
                 <div className="order">
@@ -309,13 +308,12 @@ const mapDispatchToProps = (dispatch) => ({
                       size="middle"
                       bordered
                       scroll={{ y: 400, x:1500 }}
-                      pagination={{ position: ['none','none'], total: 500, defaultPageSize: 20, defaultCurrent: 2,
-                      defaultPageSize:5, showQuickJumper:true, itemRender:(current, type, originalElement)=> {
+                      pagination={{ position: ['none','none'], total: 500, defaultPageSize: 20, defaultCurrent: 2, showQuickJumper:true, itemRender:(current, type, originalElement)=> {
                         if (type === 'prev') {
-                          return <a>Previous</a>;
+                          return <a href>Previous</a>;
                         }
                         if (type === 'next') {
-                          return <a>Next</a>;
+                          return <a href>Next</a>;
                         }
                         return originalElement;
                       }}}

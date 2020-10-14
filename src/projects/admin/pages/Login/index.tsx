@@ -3,7 +3,7 @@
  * @Author: qingyang
  * @Date: 2020-09-10 14:43:34
  * @LastEditors: qingyang
- * @LastEditTime: 2020-09-28 13:57:15
+ * @LastEditTime: 2020-10-14 17:04:56
  */
 import React, { Component } from "react";
 import {Button, Form, Input } from 'antd';
@@ -91,7 +91,11 @@ class Login extends Component<any, comState> {
                         <Form.Item
                             label="Password"
                             name="password"
-                            rules={[{ required: true, message: 'Please input your password!' }]}
+                            rules={[{ required: true, message: 'Please input your password!'},
+                                 {
+                                pattern:/^\d{8}$/,
+                                message: '只能输入8位数字'
+                            }]}
                         >
                             <Input type="password"/>
                         </Form.Item>

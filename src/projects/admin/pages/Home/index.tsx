@@ -3,7 +3,7 @@
  * @Author: qingyang
  * @Date: 2020-09-10 14:43:34
  * @LastEditors: qingyang
- * @LastEditTime: 2020-10-12 15:28:29
+ * @LastEditTime: 2020-10-14 17:11:49
  */
 import React, { Component } from "react";
 import logo from "@/assets/images/logo.svg";
@@ -14,7 +14,6 @@ import { VERSION } from "@/config/project.config";
 import { connect } from "react-redux";
 import {  Button } from 'antd';
 import { CSSTransition } from 'react-transition-group'
-import Texty from 'rc-texty';
 
 const styles = require('./index.module.less');
 

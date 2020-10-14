@@ -3,7 +3,7 @@
  * @Author: qingyang
  * @Date: 2020-09-23 17:35:58
  * @LastEditors: qingyang
- * @LastEditTime: 2020-10-10 09:57:35
+ * @LastEditTime: 2020-10-14 17:29:22
  */
 import loadable from '@/utils/loadable'
 const loadRouter = (name: string) => {
@@ -15,7 +15,6 @@ const Home = loadRouter('Home');
 const Order = loadRouter('Order');
 const OrderDetail = loadRouter('OrderDetail');
 const Notfound = loadRouter('Notfound');
-const Finance = loadRouter('Finance');
 const MainLayout = loadRouter('MainLayout');
 const Subna1 = loadRouter('Subna1');
 const routes = [

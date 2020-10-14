@@ -3,9 +3,9 @@
  * @Author: qingyang
  * @Date: 2020-09-14 15:16:29
  * @LastEditors: qingyang
- * @LastEditTime: 2020-09-28 10:34:35
+ * @LastEditTime: 2020-10-14 17:10:50
  */
-import { post, get, getBlob } from '@/config/http.config'
+import { post, get } from '@/config/http.config'
 import { BASE_URL } from '@/config/project.config';
 
 

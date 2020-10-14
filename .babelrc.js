@@ -6,7 +6,7 @@
  * @LastEditTime: 2020-10-14 15:59:17
  */
 const path = require('path')
-const context = path.resolve(__dirname, 'src')
+// const context = path.resolve(__dirname, 'src')
 module.exports = {
     presets: [
         "react-app"

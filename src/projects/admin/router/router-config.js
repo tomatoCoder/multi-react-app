@@ -3,9 +3,9 @@
  * @Author: qingyang
  * @Date: 2020-09-23 17:38:04
  * @LastEditors: qingyang
- * @LastEditTime: 2020-10-09 17:49:05
+ * @LastEditTime: 2020-10-14 17:24:57
  */
-'use strict';
+
 import {  Redirect  } from "react-router-dom";
 
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
@@ -39,8 +39,9 @@ function matchRoutes(routes, pathname,
     });
     return branch;
   }
+
 function _extends() {
-  _extends = Object.assign || function (target) {
+ var _extends = Object.assign || function (target) {
     for (var i = 1; i < arguments.length; i++) {
       var source = arguments[i];
 
